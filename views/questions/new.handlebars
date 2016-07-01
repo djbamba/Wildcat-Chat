@@ -1,0 +1,129 @@
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3">
+        <p class="lead">{{username}}</p>
+        <img src={{picture}} alt="zerg" width="200" height="auto">
+        <h4>Questions I've Asked:</h4>
+        <div class="list-group">
+          {{#each myQuestions}}
+            <a href="#" class="list-group-item">{{shortdesc}}</a>
+            <br />
+          {{/each}}
+        </div>
+        <h4>Questions I've Answered:</h4>
+        <div class="list-group">
+          {{#each questionsIveAnswered}}
+          <a href="#" class="list-group-item">{{shortdesc}}</a>
+          <br />
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="col-md-9">
+          <h1> Welcome to CIS{{courseID}} </h1>
+          <form class="questions" action="/questions/{{courseID}}/create" method="post">
+            <h3 class="form-signin-heading">Post a question by filling out the form below:</h3>
+            <textarea name="numOfReviews" class="form-control hidden">0</textarea>
+            <input name="short" type="text" id="short" class="form-control" placeholder="Write a description, keep it short as this will be used as the title" required>
+            <textarea name="question" type="text" id="question" class="form-control" placeholder="Enter your question here with as much detail as possible" rows="5" required></textarea>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Post Question</button>
+          </form>
+          <br />
+          <h3>Select a question below to answer it:</h3>
+          {{#each questions}}
+            <div class="thumbnail" style="padding:15px;">
+              <div class="caption-full">
+                  <h4><a onclick="showAnswerQuestionForm(this)" href="#">{{course}} - {{shortdesc}}</a><span class="pull-right">{{date}}</span></h4>
+                  <div id="qid" class="hidden">{{id}}</div>
+                  <div class="well">
+                    Question:
+                    <br />
+                    {{desc}}
+                  </div>
+                  <div class="author pull-right">Author: {{author}}</div>
+                  <br />
+              </div>
+
+
+              <div class="ratings">
+                  <p class="pull-right">{{numOfReviews}} reviews</p>
+                  <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    {{rating}} stars
+                  </p>
+              </div>
+            </div>
+          {{/each}}
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <hr>
+    <footer>
+      <p>Team DZS</p>
+    </footer>
+  </div>
+</body>
+
+<form id="answerQuestionForm" class="col-md-6 hidden" action="/comments/update" method="POST">
+  <div class="form-group">
+    <label for="desc">Answer this question:</label>
+    <textarea name="desc" placeholder="Enter your answer here. Be as descriptive as possible." class="form-control" rows="8" id="answer" autofocus></textarea>
+    <textarea name="user_id" class="form-control hidden">{{user_id}}</textarea>
+    <textarea name="course" class="form-control hidden">{{course}}</textarea>
+    <!-- <textarea name="repliedTo" class="form-control hidden"></textarea> -->
+  </div>
+  <button class="btn btn-lg btn-success btn-block" type="submit">Post Answer</button>
+</form>
+
+<style>
+  #answerQuestionForm {
+    background-color: green;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 1em;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  #answerQuestionForm button {
+    margin-bottom: 5px;
+  }
+  #answerQuestionForm label {
+    font-size: 1.5em;
+    padding-left: 10px;
+    margin-top: 5px;
+  }
+  h3 {
+    font-style: italic;
+  }
+  .author {
+    margin-top: -10px;
+  }
+</style>
+
+<script>
+  $("document").ready(function(){
+    showAnswerQuestionForm(anchorTag);
+  });
+
+  function showAnswerQuestionForm(anchorTag){
+    var qid = $("#qid").text();
+    var repliedTo = $(anchorTag).closest(".caption-full").find(".author").html();
+    $("#answerQuestionForm").removeClass("hidden");
+    $("#answerQuestionForm").append("<textarea id='hidden_id' name='qid' type='text' class='form-control hidden'>" + qid + "</textarea>");
+    $("#answerQuestionForm").append("<textarea name='repliedTo' class='form-control hidden'>" + repliedTo + "</textarea>");
+  }
+</script>

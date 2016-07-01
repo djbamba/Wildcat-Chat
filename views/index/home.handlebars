@@ -1,0 +1,85 @@
+<body>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3">
+        <p class="lead">{{username}}</p>
+        <img src={{picture}} alt="zerg" width="200" height="auto">
+        <h4>Questions I've Asked:</h4>
+        <div class="list-group">
+          {{#each myQuestions}}
+            <a href="#" class="list-group-item">{{shortdesc}}</a>
+            <br />
+          {{/each}}
+        </div>
+        <h4>Questions I've Answered:</h4>
+        <div class="list-group">
+          {{#each questionsIveAnswered}}
+          <a href="#" class="list-group-item">{{shortdesc}}</a>
+          <br />
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <ul class="nav nav-tabs nav-justified">
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              Class <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="active"><a href="questions/115/new">CIS 115</a></li>
+              <li role="presentation"><a href="questions/125/new">CIS 125</a></li>
+              <li role="presentation"><a href="questions/200/new">CIS 200</a></li>
+              <li role="presentation"><a href="questions/300/new">CIS 300</a></li>
+              <li role="presentation"><a href="questions/301/new">CIS 301</a></li>
+              <li role="presentation"><a href="questions/450/new">CIS 450</a></li>
+              <li role="presentation"><a href="questions/501/new">CIS 501</a></li>
+              <li role="presentation"><a href="questions/526/new">CIS 526</a></li>
+              <li role="presentation"><a href="questions/527/new">CIS 527</a></li>
+              <li role="presentation"><a href="questions/560/new">CIS 560</a></li>
+              <li role="presentation"><a href="questions/562/new">CIS 562</a></li>
+              <li role="presentation"><a href="questions/625/new">CIS 625</a></li>
+              <li role="presentation"><a href="questions/640/new">CIS 640</a></li>
+              <li role="presentation"><a href="http://localhost:3000/chat">Chat</a></li>
+              <!-- <li role="presentation"><a href="questions/CIS125">Other</a></li> -->
+            </ul>
+          </li>
+          <li role="presentation"><a id="rating" href="/home?activeTab=rating">Rating</a></li>
+          <li role="presentation"><a id="date" href="/home?activeTab=date">Date</a></li>
+          <li role="presentation"><a id="active" href="/home?activeTab=active">Active</a></li>
+          <li role="presentation"><a id="answered" href="/home?activeTab=answered">Answered</a></li>
+        </ul>
+        <br />
+        {{#each questions}}
+          <div class="thumbnail" style="padding:15px;">
+              <div class="caption-full">
+                  <h4><a href="#">{{course}}: {{shortdesc}}</a><span class="pull-right">{{date}}</span></h4>
+                  <div class="well">
+                    {{desc}}
+                  </div>
+              </div>
+              <div class="ratings">
+                  <p class="pull-right">{{numOfReviews}} reviews</p>
+                  <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    {{rating}} stars
+                  </p>
+              </div>
+          </div>
+        {{/each}}
+      </div>
+
+    </div>
+  </div>
+  <div class="container">
+    <hr>
+    <footer>
+      <p>Team DZS</p>
+    </footer>
+  </div>
+</body>

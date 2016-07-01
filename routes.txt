@@ -1,0 +1,37 @@
+ROUTES
+
+Login (Index controller):
+/login
+/
+/home
+/about
+/contact
+
+Session (Session controller):
+/sessions/new
+/sessions/create
+/sessions/delete
+
+Chat (Chat controller):
+/chat
+
+Users (Users controller):
+/users/index
+/users/new
+/users/show
+/users/:id/update
+/users/:id/delete
+/users/:userName (profile)
+
+Questions (Question controller):
+/questions/:courseID
+/questions/:courseID
+
+Comments (Comment controller):
+POST
+/comments/:questionID
+/comments/:questionID/update
+GET
+/comments/:commentID
+/comments/:commentID/delete
+/comments/:commentID/update

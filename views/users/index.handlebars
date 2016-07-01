@@ -1,0 +1,28 @@
+<link rel="stylesheet" type="text/css" href="/css/users.show.css" />
+
+<div id="listGroupContainer" class="list-group col-sm-offset-4 col-sm-4">
+  <button type="button" class="list-group-item list-group-item-warning">Red indicates that the user's account is blocked.</button>
+  {{#each users}}
+    {{#if blocked}}
+      <button type="button" class="list-group-item list-group-item-danger userAccountBtn">{{username}}<span class="pull-right">{{#if admin}}Administrator{{/if}}</span></button>
+    {{else}}
+      <button type="button" class="list-group-item list-group-item-success userAccountBtn">{{username}}<span class="pull-right">{{#if admin}}Administrator{{/if}}</span></button>
+    {{/if}}
+  {{/each}}
+</div>
+
+
+<script defer type="text/javascript">
+  $(document).ready(function(){
+    $("button[class*='userAccountBtn']").click(showUserAccount);
+  });
+
+  function showUserAccount(){
+    var url = "/users/show?username=" + $(this).text().split("Administrator")[0].trim();
+    $.get(url, function(data){
+      var formData = $(data).find("#showUserForm");
+      $("body").append(formData);
+      $("#listGroupContainer").css("display", "none");
+    });
+  }
+</script>

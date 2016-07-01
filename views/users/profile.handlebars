@@ -1,0 +1,131 @@
+<link type="text/css" rel="stylesheet" href="/css/users_profile.css"/>
+
+<div class="container-fluid" id="whole-page">
+    <div class="row-fluid">
+        <!-- Body section -->
+        <div class="col-md-12 body">
+            <div class="row-fluid">
+                <div class="col-md-12" id="main-head">
+                    <p class="text-center purple-bold">
+                        <b><i>{{user.username}}</i></b>
+                    </p>
+                    <!-- Username, picture, info here: -->
+                    <div class="row-fluid" id="main-card">
+                        <div class="row center-vertical center-block" >
+                            <div class="col-md-6 col-sm-6" id="userPic">
+                                <img class="img-responsive img-circle pull-right" src={{user.picture}} alt="Terran"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6 pull-left" id="user-info">
+                                <ul class="list-unstyled" id="infoList">
+                                    <li> Name: {{user.fname}} {{user.lname}}</li>
+                                    <!-- <li><span class="glyphicon glyphicon-pencil"></span> Posts:xxxx</li> -->
+                                    <li><span class="glyphicon glyphicon-envelope"></span> : <a href="mailto:{{user.email}}?subject=Wildcat Tutors">Email {{user.username}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Username, picture, info end-->
+                </div>
+            </div>
+            <!-- Content section -->
+
+            <div class="row-fluid main-content">
+                <div class="row-fluid">
+    <!-- -//////////////////////////////////////////// Question column ////////////////////////////////////////////-->
+<div class="col-md-5" id="question-column">
+<h2>Questions:</h2>
+<div class="list-group">
+{{#each questions}}
+<div class="list-group-item row" style="border:1px solid #5a2b81;">
+<div class="row text-center" id="question-info">
+	<span class="col-md-4">In: <a href="/questions/{{course}}">{{course}}</a></span>
+	<span class="col-md-6 col-md-offset-2">{{date}}</span>
+</div>
+<div class="row text-center">
+	<div class="col-md-12 center-block">
+		<i><p>{{shortdesc}}</p></i>
+	</div>
+</div>
+
+<div class="row">
+    {{#if show}}
+    <button class="btn glyphicon glyphicon-comment pull-right profileGlyph" role="button"  onclick="commentBox(this);" id="question-show-{{id}}"></button>
+    <button class="btn glyphicon glyphicon-wrench pull-right profileGlyph" role="button" onclick="updatePost(this);" id="question-update-{{id}}"></button>
+    <a class="btn glyphicon glyphicon-remove pull-right profileGlyph" role="button"  href="/questions/{{id}}/delete" id="question-delete-{{id}}"></a>
+    {{/if}}
+    {{#if other}}
+    <button class="btn glyphicon glyphicon-comment pull-right profileGlyph" role="button"  onclick="commentBox(this);" id="question-show-{{id}}"></button>
+    {{/if}}
+</div>
+
+<div class="row hidden" id="hidden-{{id}}">
+    <div class="text-center hidden comment-preview" id="hidden-preview-{{id}}">
+    </div>
+    <form action="/comments/{{id}}" method="POST">
+        <div class="col-md-10 col-md-offset-1">
+                <textarea class="form-control comment-box" rows="3" name="comment" id="text-area-{{id}}"></textarea>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-default" type="button" role="button" onclick="previewPost(this);" id="comment-preview-{{id}}">Preview</button>
+            <button class="btn btn-default" type="submit" role="button">Submit</button>
+        </div>
+        <input type="text" class="hidden" name="user" value="{{author}}"/>
+        <input type="text" class="hidden" name="course" value="{{course}}"/>
+    </form>
+    <div class="list-group-item row comments-under-questions" id="question-comments-{{id}}">
+
+    </div>
+    <script>
+            var comms = document.getElementById('question-comments-{{id}}');
+            var request = new XMLHttpRequest();
+            request.open("GET","/comments/{{id}}");
+            request.onreadystatechange = function(){
+                if(request.readyState === 4 && request.status === 200){
+                    comms.innerHTML = request.responseText;
+                }
+            };
+            request.send();
+
+    </script>
+</div>
+</div>
+<hr/>
+{{/each}}
+</div>
+</div>
+<script src="/javascript/bundle.js" type="text/javascript">
+</script>
+            <!--//////////////////////////////////////////// Comment column ////////////////////////////////////////////-->
+<div class="col-md-6 col-md-offset-1" id="comment-column">
+<h2>Comments:</h2>
+<div class="list-group" id="comment-display">
+{{#each comments}}
+<div class="list-group-item row" style="border:1px solid #5a2b81;" id="comment-display-{{id}}">
+<div class="row text-center" id="comment-info">
+    <span class="col-md-3 ">In: <a href="/questions/{{course}}">{{course}}</a></span>
+    <span class="col-md-4 ">To: <a href="/users/{{repliedTo}}">{{repliedTo}}</a></span>
+    <span class="col-md-5 col-xs-5">{{date}}</span>
+</div>
+<div class="row text-center">
+	<div class="col-md-12 center-block">
+		<i><p>{{desc}}</p></i>
+	</div>
+</div>
+<div class="row">
+    {{#if show }}
+    <button class="btn glyphicon glyphicon-wrench pull-right profileGlyph" role="button"  onclick="updatePost(this);" id="comment-update-{{id}}"></button>
+    <a class="btn glyphicon glyphicon-remove pull-right profileGlyph" role="button"  href="/comments/{{id}}/delete" id="comment-delete-{{id}}"></a>
+    {{/if}}
+</div>
+</div><hr/>
+{{/each}}
+</div>
+</div>
+</div>
+</div>
+        </div>
+
+        <!-- End of Body Section -->
+    </div>
+
+</div>

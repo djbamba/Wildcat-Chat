@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{>head}}
+    <title>Team DZS</title>
+    <style type="text/css">
+        div.container{
+            display:table;
+            position:absolute;
+            width:100%;
+            height:100%;
+
+        }
+        div.middle{
+            display:table-cell;
+            vertical-align:middle;
+        }
+        div.alert.alert-danger.center-block{
+            width:80%;
+            margin-left:auto;
+            margin-right:auto;
+            font-size: 60px;
+        }
+    </style>
+
+    </head>
+    <body>
+        <div class ="container">
+            <div class="middle">
+                {{{body}}}
+            </div>
+        </div>
+    </body>
+</html>

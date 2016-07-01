@@ -1,0 +1,19 @@
+form {
+  background-color: beige;
+  border-style: groove;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  box-shadow: 1px 1px 5px #333;
+}
+
+button[type="submit"] {
+  margin-right: 15px;
+}
+
+#userID {
+  display: none;
+}
+
+#deleteAccountBtn{
+  margin-right: 5px;
+}

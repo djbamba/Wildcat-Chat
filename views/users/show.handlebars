@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="/css/users.show.css" />
+
+<form id="showUserForm" class="col-sm-offset-4 col-sm-4" action="/users/{{user.id}}/update" method="POST" enctype="multipart/form-data">
+  <fieldset class="form-group">
+    <label for="fname">First name</label>
+    <input name="fname" type="text" class="form-control" id="fname" placeholder="Enter first name" value={{user.fname}}>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="lname">Last name</label>
+    <input name="lname" type="text" class="form-control" id="lname" placeholder="Enter last name" value={{user.lname}}>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="username">Username</label>
+    <input name="username" type="text" class="form-control" id="username" placeholder="Enter username" value={{user.username}}>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="email">Email address</label>
+    <input name="email" type="email" class="form-control" id="email" placeholder="Enter primary email address" value={{user.email}}>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="password">Password</label>
+    <input name="password" type="password" class="form-control" id="password" placeholder="To change: enter password and apply changes">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="picture">Upload profile picture</label>
+    <input name="picture" type="file" class="form-control-file" id="picture">
+    <small class="text-muted">Restrict filetypes to .png or .jpg</small>
+  </fieldset>
+
+  <div class="checkbox">
+    <label><input name="admin" type="checkbox" {{#if user.admin}}checked{{else}}unchecked{{/if}}>Administrator</label><br />
+    <label><input name="blocked" type="checkbox" {{#if user.blocked}}checked{{else}}unchecked{{/if}}>Blocked</label>
+  </div>
+  <button role="button" type="submit" class="btn btn-primary pull-right">Apply Changes</button>
+  <a id="deleteAccountBtn" role="button" type="button" href="/users/{{user.id}}/delete" class="btn btn-danger pull-right">Delete Account</a>
+</form>

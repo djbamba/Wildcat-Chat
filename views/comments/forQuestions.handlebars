@@ -1,0 +1,35 @@
+{{#each comments}}
+
+<div class="list-group-item row comments-under">
+    <div class="row text-center question-comment-info">
+        <span class="col-md-3 ">In: <a href="/questions/{{course}}">{{course}}</a></span>
+        <span class="col-md-4 ">To: <a href="/users/{{repliedTo}}">{{repliedTo}}</a></span>
+        <span class="col-md-5 col-xs-5">{{date}}</span>
+    </div>
+
+    {{#if other}}
+    <div class="row text-center question-comment-description">
+        <div class="col-md-12 center-block">
+            <i><p>{{desc}}</p></i>
+        </div>
+    </div>
+
+    {{/if}}
+    {{#if show}}
+    <div class="row text-center question-comment-description">
+        <form action="/comments/{{id}}/update" method="POST">
+            <div class="comment-box text-center">
+                <i><p>{{desc}}</p></i>
+            </div>
+        </form>
+    </div>
+    {{/if}}
+    <div class="row question-comment-buttons">
+        {{#if show }}
+        <button class="btn glyphicon glyphicon-wrench pull-right profileGlyph" role="button"  onclick="update(this);" id="update{{id}}"></button>
+        <a class="btn glyphicon glyphicon-remove pull-right profileGlyph" role="button"  href="/comments/{{id}}/delete" ></a>
+        <span class="clear"></span>
+        {{/if}}
+    </div>
+</div>
+{{/each}}

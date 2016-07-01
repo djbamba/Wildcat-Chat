@@ -1,0 +1,12 @@
+
+<link rel="stylesheet" href="/css/users_new.css">
+  <div id="newUserFormContainer" class="container" >
+    <form class="form-signin" action="/users/create" method="POST">
+      <h2 id="signUpHeader" class="form-signin-heading">Please Sign Up:</h2>
+      <input name="fname" type="text" id="inputFName" class="form-control" placeholder="Enter your full first name" required autofocus>
+      <input name="lname" type="text" id="inputLName" class="form-control" placeholder="Enter your full surname" required>
+      <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Choose a unique username" required>
+      <input name="email" type="text" id="inputEmail" class="form-control" placeholder="Enter a valid Email Address" required >
+      <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Choose a strong Password" required>
+      <button class="btn btn-lg btn-success btn-block">Sign Up</button>
+    </form>
